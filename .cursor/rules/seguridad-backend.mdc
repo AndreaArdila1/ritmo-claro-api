@@ -1,0 +1,22 @@
+---
+description: Reglas de seguridad para ritmo-claro-api (NestJS + Prisma + JWT)
+alwaysApply: true
+---
+
+# Seguridad de autenticación y autorización
+
+- Nunca agregues un campo "rol" ni "usuarioId" a un DTO que el cliente pueda
+  enviar. El rol y el dueño de un recurso se asignan en el servidor, nunca
+  vienen del body de la petición.
+- Toda contraseña se cifra con bcrypt (factor de costo 10 o más). Nunca la
+  guardes ni la registres en texto plano, ni en logs ni en consola.
+- El JWT se firma solo con el algoritmo por defecto de @nestjs/jwt. Nunca
+  sugieras deshabilitar la verificación de la firma.
+- Todo endpoint que modifique o exponga datos debe pasar por JwtAuthGuard, y
+  si aplica una restricción de rol, también por RolesGuard.
+- Los mensajes de error de login y registro nunca deben revelar si un email
+  existe o no en la base de datos.
+- Nunca imprimas JWT_SECRET, DATABASE_URL, un access_token completo ni
+  contraseñas en console.log ni en mensajes de error.
+- La configuración sensible (JWT_SECRET, DATABASE_URL) se lee de variables de
+  entorno; nunca la escribas literal en el código ni la subas a GitHub.
