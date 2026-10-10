@@ -29,7 +29,7 @@ import {
       });
     }
   
-    obtenerTodasAdmin() {
+    obtenerTodosAdmin() {
       return this.prisma.habito.findMany({
         include: {
           usuario: { select: { id: true, nombre: true, email: true } },

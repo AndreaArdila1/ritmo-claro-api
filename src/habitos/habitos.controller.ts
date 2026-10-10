@@ -39,11 +39,11 @@ import {
       return this.habitosService.obtenerMias(usuario.id);
     }
   
-    @Get('admin/todas')
+    @Get('admin/todos')
     @UseGuards(RolesGuard)
     @Roles([Rol.ADMIN])
     obtenerTodasAdmin() {
-      return this.habitosService.obtenerTodasAdmin();
+      return this.habitosService.obtenerTodosAdmin();
     }
   
     @Get(':id')
